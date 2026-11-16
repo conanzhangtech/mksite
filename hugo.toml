@@ -1,0 +1,5 @@
+# Used by themes.gohugo.io and Hugo Modules. Your own site's hugo.toml is separate.
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.146.0"

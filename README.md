@@ -1,5 +1,7 @@
 # mksite
 
+![mksite demo: a portfolio with projects, research and articles](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/screenshot.png)
+
 A free Hugo theme for product pages and documentation. Made by [Conan Zhang](https://czt.sh) under the [ProjectOpenCZTSH](https://open.czt.sh) Initiative.
 
 - Project page: https://mksite.czt.sh
