@@ -1,28 +1,16 @@
 # mksite
 
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-0b6b52)](LICENSE) [![Hugo 0.146+](https://img.shields.io/badge/Hugo-0.146%2B-ff4088)](https://gohugo.io) [![Sponsor](https://img.shields.io/github/sponsors/conanzhangtech?label=Sponsor&logo=githubsponsors)](https://github.com/sponsors/conanzhangtech)
+
+**Write Markdown files. Get a website.** mksite is a free Hugo theme for portfolios, research papers, product pages and documentation. Papers open in a PDF reader on the page, and your résumé prints to PDF.
+
+[**Live demo**](https://demo.mksite.czt.sh) · [Guide](https://docs.open.czt.sh/mksite/) · [Project page](https://mksite.czt.sh)
+
 ![mksite demo: a portfolio with projects, research and articles](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/screenshot.png)
 
-A free Hugo theme for portfolios, research papers with a built-in PDF reader, product pages and documentation. Made by [Conan Zhang](https://czt.sh) under the [ProjectOpenCZTSH](https://open.czt.sh) Initiative.
+## Quick start
 
-- Project page: https://mksite.czt.sh
-- Demo: https://demo.mksite.czt.sh
-- Guide: https://docs.open.czt.sh/mksite/
-
-## What you get
-
-- A home page set from front matter: headline, buttons, three features, free text.
-- A plain page layout for About, Privacy and similar pages.
-- A documentation layout with a sidebar, a table of contents, next and previous links, and a button back to the product page.
-- Shortcodes: `button`, `callout`, `steps`, `kbd`, `pdf`.
-- Portfolio mode: projects, research and articles, connected work, a timeline with CSS-only filters, search, four colour palettes and dark mode.
-- A PDF reader that runs from your own site (pdf.js, Apache-2.0, in `static/vendor/pdfjs/`), with selectable text and a download button.
-- Research pages carry Google Scholar tags, a BibTeX box and ScholarlyArticle data.
-- Title, description, canonical link, Open Graph and JSON-LD.
-- No tracking and no fonts from other servers. JavaScript is used only for search, copy buttons, the colour switcher and the PDF reader.
-
-Needs Hugo 0.146 or newer (the standard edition is enough).
-
-## Use it
+You need [Hugo](https://gohugo.io/installation/) 0.146 or newer and Git.
 
 ```bash
 hugo new site my-site && cd my-site
@@ -31,25 +19,59 @@ cp -r themes/mksite/starter/* . && cp -r themes/mksite/archetypes .
 hugo server
 ```
 
-Then add work with `hugo new projects/my-app`, `hugo new research/my-paper` or `hugo new articles/my-note`. The full guide is at https://docs.open.czt.sh/mksite/.
+Open the address Hugo prints. Then add your own work:
+
+```bash
+hugo new projects/my-app
+hugo new research/my-paper
+hugo new articles/what-i-learned
+```
+
+Each command makes a folder with the right fields inside. Put a `cover.jpg` in a project or article for a picture, or a `.pdf` in a research folder for the reader.
+
+## What you get
+
+| | |
+| --- | --- |
+| **Projects** | Cards with a cover picture, a facts row and links. Projects, papers and articles can point to each other. |
+| **Research** | A PDF reader on the page, a "Cite this paper" box with BibTeX, and the tags Google Scholar reads. |
+| **Articles** | Reading time, a progress bar and thumbnails. |
+| **Résumé** | Built from your front matter and the rest of the site. Prints to A4 or saves as PDF. |
+| **Portfolio page** | Case studies, services, highlights and a contact band. |
+| **Search** | Press `/` anywhere. No server needed. |
+| **Look** | Four colour palettes, dark mode, social links as icons, 37 built-in icons. |
+| **Docs mode** | Sidebar, table of contents, next and previous links, and a button back to the product page. |
+| **Privacy** | No tracking and no fonts from other servers. JavaScript only for search, copy buttons, the colour switcher and the PDF reader. |
+
+## Screenshots
+
+| Project | Research with the PDF reader |
+| --- | --- |
+| ![A project page](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/project.jpg) | ![The PDF reader](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/pdf-reader.png) |
+
+| Portfolio | Résumé |
+| --- | --- |
+| ![The portfolio page](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/portfolio.jpg) | ![The résumé page](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/resume.png) |
+
+| Research list | On a phone |
+| --- | --- |
+| ![The research list](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/research.png) | <img src="https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/mobile.png" width="260" alt="The home page on a phone"> |
 
 ## Folders
 
 | Folder | What it holds |
 | --- | --- |
-| `layouts/` | Templates, partials and shortcodes |
-| `assets/css/` | The stylesheet |
-| `static/` | The font and the `_headers` file for Cloudflare |
+| `layouts/`, `assets/`, `static/` | The theme itself |
 | `starter/` | A small site to copy and edit |
-| `archetypes/` | Templates for `hugo new` |
-| `exampleSite/` | The demo site at demo.mksite.czt.sh |
-| `landing/` | The product page at mksite.czt.sh |
+| `archetypes/` | The templates behind `hugo new` |
+| `exampleSite/` | The demo at demo.mksite.czt.sh |
+| `landing/` | The project page at mksite.czt.sh |
 
-To preview either site from this folder: `hugo server --source exampleSite --themesDir ../..`
+To preview the demo from this folder: `hugo server --source exampleSite --themesDir ../..`
 
-## Support this project
+## Support
 
-mksite is free, has no adverts and is built by one person in his own time. If it saved you time, you can say thanks:
+mksite is free and has no adverts. If it saved you time, you can say thanks:
 
 | Way to give | Link | Notes |
 | --- | --- | --- |
@@ -69,3 +91,5 @@ More ways to give are on the [support page](https://open.czt.sh/#support). Starr
 ## Licence
 
 MIT. See `LICENSE`. The bundled pdf.js is Apache-2.0; its licence is in `static/vendor/pdfjs/LICENSE`.
+
+Made by [Conan Zhang](https://czt.sh) under the [ProjectOpenCZTSH](https://open.czt.sh) Initiative.
