@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{- $research := (where site.RegularPages "Section" "research").ByDate.Reverse -}}
+{{- $projects := (where (where site.RegularPages "Section" "projects") "Params.featured" true).ByDate.Reverse -}}
+<div class="container resume-wrap">
+  <div class="resume-tools">
+    <h1 class="page-title">{{ .Title }}</h1>
+    <p class="page-lede">{{ .Description }}</p>
+    <div class="cta">
+      <button class="btn" type="button" data-print>{{ partial "icon.html" "printer" }}Save as PDF</button>
+      {{- with .Params.pdf }}<a class="btn light" href="{{ . | relURL }}" download>{{ partial "icon.html" "download" }}Download the PDF</a>{{ end }}
+    </div>
+    <p class="meta">Save as PDF opens your browser's print window. Choose "Save as PDF" as the printer.</p>
+  </div>
+
+  <article class="resume" aria-label="Résumé">
+    <header class="r-head">
+      <h2 class="r-name">{{ .Params.name }}</h2>
+      <p class="r-label">{{ .Params.label }}</p>
+      <p class="r-contact">{{ with .Params.location }}<span>{{ partial "icon.html" "map-pin" }}{{ . }}</span>{{ end }}{{ with .Params.email }}<span>{{ partial "icon.html" "mail" }}<a href="mailto:{{ . }}">{{ . }}</a></span>{{ end }}{{ with .Params.web }}<span>{{ partial "icon.html" "globe" }}<a href="{{ . }}">{{ . | replaceRE "^https?://" "" }}</a></span>{{ end }}</p>
+      {{ partial "social.html" (dict "class" "r-social") }}
+    </header>
+
+    {{- with .Params.summary }}
+    <section><h3>Profile</h3><p>{{ . }}</p></section>
+    {{- end }}
+
+    {{- with .Params.experience }}
+    <section><h3>Experience</h3>
+      {{- range . }}
+      <div class="r-item">
+        <div class="r-line"><span class="r-title"><b>{{ .role }}</b>, {{ .org }}</span><span>{{ .from }} to {{ .to }}</span></div>
+        {{- with .points }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+      </div>
+      {{- end }}
+    </section>
+    {{- end }}
+
+    {{- if $research }}
+    <section><h3>Selected publications</h3>
+      <ul class="r-pubs">
+        {{- range first 6 $research }}
+        <li>{{ delimit .Params.authors ", " }} ({{ .Params.year | default (.Date.Format "2006") }}). {{ .Title }}.{{ with .Params.venue }} <i>{{ . }}</i>.{{ end }}{{ with .Params.doi }} doi:{{ . }}{{ end }}</li>
+        {{- end }}
+      </ul>
+    </section>
+    {{- end }}
+
+    {{- if $projects }}
+    <section><h3>Projects</h3>
+      {{- range $projects }}
+      <div class="r-item"><div class="r-line"><span class="r-title"><b>{{ .Title }}</b>{{ with .Params.role }}, {{ . }}{{ end }}</span><span>{{ .Params.year | default (.Date.Format "2006") }}</span></div><p>{{ .Description }}</p></div>
+      {{- end }}
+    </section>
+    {{- end }}
+
+    {{- with .Params.education }}
+    <section><h3>Education</h3>
+      {{- range . }}<div class="r-item"><div class="r-line"><span class="r-title"><b>{{ .degree }}</b>, {{ .school }}</span><span>{{ .years }}</span></div></div>{{ end }}
+    </section>
+    {{- end }}
+
+    {{- with .Params.skills }}
+    <section><h3>Skills</h3>
+      <dl class="r-skills">{{ range . }}<div><dt>{{ .group }}</dt><dd>{{ delimit .items ", " }}</dd></div>{{ end }}</dl>
+    </section>
+    {{- end }}
+
+    {{- with .Params.awards }}
+    <section><h3>Awards</h3><ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul></section>
+    {{- end }}
+  </article>
+</div>
+{{ end }}

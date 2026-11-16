@@ -1,0 +1,8 @@
+<li class="rrow has-thumb">
+  <span class="when">{{ .Date.Format "2 Jan 2006" }}<br><small>{{ .ReadingTime }} min read</small></span>
+  <div>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="abs">{{ .Description | default .Summary | plainify | truncate 190 }}</p>
+  </div>
+  {{- if .Resources.GetMatch "cover.*" }}<a class="thumb" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">{{ partial "cover.html" (dict "page" . "w" 400 "h" 250) }}</a>{{ else }}<span></span>{{ end }}
+</li>

@@ -1,0 +1,23 @@
+baseURL = "https://example.com/"
+title = "Your Name"
+theme = "mksite"
+disableKinds = ["taxonomy", "term", "RSS"]
+
+# The home page also writes /index.json, which the search box reads.
+[outputs]
+  home = ["HTML", "JSON"]
+
+[params]
+  description = "My projects, research and writing."
+  owner = "Your Name"
+  search = true
+  paletteSwitcher = true   # little colour squares in the footer
+  # palette = "clay"       # jade (default), clay, sea or ink
+
+  # Round icon buttons. Add or remove lines freely.
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/yourname"
+  [[params.social]]
+    name = "Email"
+    url = "mailto:you@example.com"

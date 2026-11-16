@@ -1,0 +1,5 @@
+{{- $kind := .Get "type" | default "note" -}}
+<div class="callout{{ if eq $kind "warn" }} warn{{ end }}"{{ if eq $kind "warn" }} role="note"{{ end }}>
+  <span class="label">{{ .Get "title" | default (cond (eq $kind "warn") "Careful" "Note") }}</span>
+  {{ .Inner | markdownify }}
+</div>

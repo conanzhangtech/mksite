@@ -1,0 +1,2 @@
+{{- $style := .Get "style" -}}
+<a class="btn{{ with $style }} {{ . }}{{ end }}" href="{{ .Get "url" }}">{{ with .Get "icon" }}{{ partial "icon.html" . }}{{ end }}{{ .Get "label" }}</a>

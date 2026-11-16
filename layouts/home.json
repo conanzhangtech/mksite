@@ -1,0 +1,7 @@
+{{- $out := slice -}}
+{{- range site.RegularPages }}
+  {{- if in (slice "projects" "research" "articles") .Section }}
+    {{- $out = $out | append (dict "title" .Title "url" .RelPermalink "type" (cond (eq .Section "projects") "Project" (cond (eq .Section "research") "Research" "Article")) "summary" (.Description | default .Summary | plainify | truncate 160) "tags" (.Params.tags | default slice)) }}
+  {{- end }}
+{{- end }}
+{{- $out | jsonify -}}

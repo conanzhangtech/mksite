@@ -1,0 +1,13 @@
+name = "mksite"
+license = "MIT"
+licenselink = "https://github.com/conanzhangtech/mksite/blob/main/LICENSE"
+description = "A Hugo theme for portfolios, research papers with a built-in PDF reader, product pages and documentation."
+homepage = "https://mksite.czt.sh"
+demosite = "https://demo.mksite.czt.sh"
+tags = ["portfolio", "personal", "resume", "documentation", "landing page", "blog", "responsive", "accessible", "dark mode"]
+features = ["portfolio", "PDF reader", "resume that prints to PDF", "search", "four colour palettes", "dark mode", "documentation with sidebar", "SEO", "no tracking"]
+min_version = "0.146.0"
+
+[author]
+  name = "Conan Zhang"
+  homepage = "https://czt.sh"

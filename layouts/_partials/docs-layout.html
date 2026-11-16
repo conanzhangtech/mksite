@@ -1,0 +1,51 @@
+{{- $sec := .CurrentSection -}}
+<div class="container docs">
+  <aside class="docs-nav" aria-label="Documentation">
+    {{- if $sec.IsHome | not }}
+    <p class="product">{{ $sec.Title }}</p>
+    {{- with $sec.Params.product_url }}
+    <a class="btn light back" href="{{ . }}">&larr; Back to {{ $sec.Params.product_name | default $sec.Title }}</a>
+    {{- end }}
+    <ul>
+      <li><a href="{{ $sec.RelPermalink }}"{{ if eq $sec.RelPermalink $.RelPermalink }} aria-current="page"{{ end }}>Overview</a></li>
+      {{- range $sec.RegularPages.ByWeight }}
+      <li><a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    {{- $others := where site.Sections "RelPermalink" "ne" $sec.RelPermalink }}
+    {{- if $others }}
+    <div class="others">
+      <p>{{ if $sec.IsHome }}Products{{ else }}Other products{{ end }}</p>
+      <ul>{{ range $others.ByWeight }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+    </div>
+    {{- end }}
+  </aside>
+  <article>
+    {{- with $sec.Params.product_url }}
+    <p class="topback"><a href="{{ . }}">&larr; Back to {{ $sec.Params.product_name | default $sec.Title }}</a></p>
+    {{- end }}
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{- with .Description }}<p class="page-lede">{{ . }}</p>{{ end }}
+    <div class="prose">{{ .Content }}</div>
+    {{- if .IsPage }}
+    {{- /* Hugo counts "next" towards newer pages, so in weight order it points backwards. */ -}}
+    <nav class="pager" aria-label="Next and previous">
+      {{- with .NextInSection }}<a class="prev" href="{{ .RelPermalink }}"><small>Previous</small>{{ .LinkTitle }}</a>{{ end }}
+      {{- with .PrevInSection }}<a class="next" href="{{ .RelPermalink }}"><small>Next</small>{{ .LinkTitle }}</a>{{ end }}
+    </nav>
+    {{- else if .Pages }}
+    <ul class="cards">
+      {{- range .Pages.ByWeight }}
+      <li class="card"><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ .Description | default .Summary | plainify | truncate 140 }}</p></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </article>
+  <aside class="docs-toc" aria-label="On this page">
+    {{- if and .IsPage (gt (len .TableOfContents) 80) }}
+    <p class="label">On this page</p>
+    {{ .TableOfContents }}
+    {{- end }}
+  </aside>
+</div>

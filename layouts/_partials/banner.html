@@ -1,0 +1,7 @@
+{{- with site.Params.banner }}
+<div class="banner" role="note">
+  <div class="container banner-inner">
+    <p>{{ .text }}{{ with .url }} <a href="{{ . }}">{{ $.Site.Params.banner.linkLabel | default "Learn more" }}</a>{{ end }}</p>
+  </div>
+</div>
+{{- end }}

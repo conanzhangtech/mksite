@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="container section">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{- with .Description }}<p class="page-lede">{{ . }}</p>{{ end }}
+  <div class="prose">{{ .Content }}</div>
+  <ul class="cards">
+    {{- range .Pages }}
+    <li class="card"><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ .Description | default .Summary | plainify | truncate 140 }}</p></li>
+    {{- end }}
+  </ul>
+</div>
+{{ end }}

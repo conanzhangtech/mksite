@@ -1,0 +1,17 @@
+{{- /* Usage: partial "pdf.html" (dict "page" . "url" "/x.pdf" "title" "Paper") */ -}}
+{{- .page.Store.Set "pdf" true -}}
+<div class="pdf" data-src="{{ .url }}" data-base="{{ "vendor/pdfjs/" | relURL }}">
+  <div class="pdf-bar" role="toolbar" aria-label="PDF reader">
+    <span class="title">{{ .title | default "PDF" }}</span>
+    <button type="button" data-prev aria-label="Previous page">&lsaquo;</button>
+    <span class="pg"><input type="number" min="1" value="1" data-page aria-label="Page number"> of <span data-total>…</span></span>
+    <button type="button" data-next aria-label="Next page">&rsaquo;</button>
+    <button type="button" data-out aria-label="Zoom out">&minus;</button>
+    <button type="button" data-fit aria-label="Fit to width">Fit</button>
+    <button type="button" data-in aria-label="Zoom in">+</button>
+    <a class="tb" href="{{ .url }}" download>{{ partial "icon.html" "download" }}Download</a>
+    <a class="tb" href="{{ .url }}" target="_blank" rel="noopener">{{ partial "icon.html" "external-link" }}New tab</a>
+  </div>
+  <div class="pdf-pages"><p class="pdf-status" role="status">Loading the PDF…</p></div>
+  <noscript><p class="pdf-fallback">The reader needs JavaScript. <a href="{{ .url }}">Download the PDF</a> instead.</p></noscript>
+</div>

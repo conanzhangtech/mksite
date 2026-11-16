@@ -1,0 +1,11 @@
+<li class="rrow plain">
+  <div>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="by">{{ delimit .Params.authors ", " }}{{ with .Params.venue }}. <i>{{ . }}</i>{{ end }}</p>
+    {{- with .Params.abstract }}<p class="abs">{{ . | plainify | truncate 190 }}</p>{{ end }}
+  </div>
+  <div class="acts">
+    {{- with .Resources.GetMatch "*.pdf" }}<a class="btn sm light" href="{{ .RelPermalink }}" download>{{ partial "icon.html" "download" }}PDF</a>{{ end }}
+    <a class="btn sm" href="{{ .RelPermalink }}">Read</a>
+  </div>
+</li>

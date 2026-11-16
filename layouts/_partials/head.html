@@ -1,0 +1,38 @@
+{{- $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) -}}
+{{- if and .IsHome site.Params.tagline }}{{ $title = printf "%s: %s" site.Title site.Params.tagline }}{{ end -}}
+{{- $desc := .Description | default .Summary | default site.Params.description | plainify | truncate 160 -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- with site.Params.themeColor }}<meta name="theme-color" content="{{ . }}">{{ end }}
+{{- with site.Params.icon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
+{{- $css := slice (resources.Get "css/main.css") (resources.Get "css/portfolio.css") | resources.Concat "css/bundle.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- if site.Params.paletteSwitcher }}
+{{- $pal := resources.Get "js/palette.js" | minify | fingerprint }}
+<script src="{{ $pal.RelPermalink }}" integrity="{{ $pal.Data.Integrity }}"></script>
+{{- end }}
+{{- $js := resources.Get "js/site.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- with site.Params.fontPreload | default "/fonts/schibsted-grotesk.woff2" }}
+<link rel="preload" href="{{ . }}" as="font" type="font/woff2" crossorigin>
+{{- end }}
+{{ partial "scholar.html" . }}
+{{ partial "head-extra.html" . }}
+<meta property="og:type" content="{{ cond .IsHome "website" "article" }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+{{- with site.Params.image }}
+<meta property="og:image" content="{{ . | absURL }}">
+<meta name="twitter:card" content="summary_large_image">
+{{- end }}
+{{- with site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+{{- if .IsHome }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "url" site.Home.Permalink "description" $desc | jsonify | safeJS }}</script>
+{{- else if .Date }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "description" $desc "url" .Permalink "dateModified" (.Lastmod.Format "2006-01-02") "author" (dict "@type" "Person" "name" (site.Params.author | default "")) | jsonify | safeJS }}</script>
+{{- end }}

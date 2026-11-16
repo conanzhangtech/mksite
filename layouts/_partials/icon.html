@@ -1,0 +1,4 @@
+{{- /* Usage: partial "icon.html" "github". Inline SVG from assets/icons, drawn in the surrounding text colour. */ -}}
+{{- with resources.Get (printf "icons/%s.svg" .) -}}
+{{- replace .Content "<svg " "<svg class=\"icon\" aria-hidden=\"true\" focusable=\"false\" " | safeHTML -}}
+{{- end -}}

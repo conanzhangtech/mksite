@@ -1,0 +1,49 @@
+{{ define "main" }}
+{{- $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse -}}
+<div class="container pf-article">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="standfirst">{{ . }}</p>{{ end }}
+
+  <h2 class="pf-sub">Selected work</h2>
+  {{- range $i, $p := $projects }}
+  <article class="case{{ if eq (mod $i 2) 1 }} flip{{ end }}">
+    {{- $img := $p.Resources.GetMatch "cover.*" }}
+    {{- if $img }}<a class="case-img" href="{{ $p.RelPermalink }}" tabindex="-1" aria-hidden="true">{{ partial "cover.html" (dict "page" $p "w" 960 "h" 600) }}</a>{{ end }}
+    <div class="case-text">
+      <p class="case-meta">{{ $p.Params.year | default ($p.Date.Format "2006") }}{{ with $p.Params.role }} · {{ . }}{{ end }}</p>
+      <h3><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+      <p>{{ $p.Description }}</p>
+      {{- with $p.Params.stack }}<p class="case-stack">{{ delimit . ", " }}</p>{{ end }}
+      <a class="case-link" href="{{ $p.RelPermalink }}">Read the case study{{ partial "icon.html" "arrow-right" }}</a>
+    </div>
+  </article>
+  {{- end }}
+
+  {{- with .Params.services }}
+  <h2 class="pf-sub">Where I can help</h2>
+  <dl class="services">
+    {{- range . }}<div><dt>{{ .title }}</dt><dd>{{ .text }}</dd></div>{{ end }}
+  </dl>
+  {{- end }}
+
+  {{- with .Params.highlights }}
+  <h2 class="pf-sub">Talks and recognition</h2>
+  <ul class="rows-list">
+    {{- range . }}<li class="rrow"><span class="when">{{ .year }}</span><div><h3>{{ .title }}</h3>{{ with .where }}<p class="by">{{ . }}</p>{{ end }}</div><div></div></li>{{ end }}
+  </ul>
+  {{- end }}
+
+  <div class="contact-band">
+    <div>
+      <h2>Work with me</h2>
+      {{- with .Params.contact }}<p>{{ . }}</p>{{ end }}
+      {{ partial "social.html" (dict "class" "find") }}
+    </div>
+    <div class="cta">
+      {{- with .Params.email }}<a class="btn" href="mailto:{{ . }}">{{ partial "icon.html" "mail" }}Email {{ . }}</a>{{ end }}
+      <a class="btn light" href="{{ "resume/" | relURL }}">{{ partial "icon.html" "file-text" }}See my résumé</a>
+    </div>
+  </div>
+  <div class="prose">{{ .Content }}</div>
+</div>
+{{ end }}

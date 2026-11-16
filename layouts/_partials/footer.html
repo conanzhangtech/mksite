@@ -1,0 +1,43 @@
+{{- $c := site.Params.initiative | default dict -}}
+{{- $f := site.Params.footer | default dict -}}
+<footer class="site-footer{{ if $f.columns }} rich{{ end }}">
+  {{- if $f.columns }}
+  <div class="container footer-top">
+    <div>
+      <p class="about-line">{{ $f.headline | default site.Title }}</p>
+      {{- with $f.text }}<p class="about-text">{{ . }}</p>{{ end }}
+      {{- with $f.cta }}<a class="btn sm" href="{{ .url }}">{{ with .icon }}{{ partial "icon.html" . }}{{ end }}{{ .label }}</a>{{ end }}
+      {{ partial "social.html" (dict "class" "foot-social") }}
+    </div>
+    {{- range $f.columns }}
+    <nav aria-label="{{ .title }}">
+      <h2>{{ .title }}</h2>
+      <ul>{{ range .links }}<li><a href="{{ .url }}">{{ .label }}</a></li>{{ end }}</ul>
+    </nav>
+    {{- end }}
+  </div>
+  <div class="container"><div class="footer-base">
+    <span>&copy; {{ now.Year }} {{ site.Params.owner | default site.Title }}{{ with site.Params.licence }}. {{ . }}{{ end }}</span>
+    {{- if site.Params.paletteSwitcher }}
+    <span class="swatches"><span class="lab">Colour</span>
+      {{- range slice "jade" "clay" "sea" "ink" }}<button type="button" data-palette-set="{{ . }}" aria-label="{{ . | title }} palette" aria-pressed="false"></button>{{ end }}
+    </span>
+    {{- end }}
+    {{- if not $c.hide }}<span class="credit">{{ $c.prefix | default "Developed under the" }} <a href="{{ $c.url | default "https://open.czt.sh" }}">{{ $c.name | default "ProjectOpenCZTSH" }}</a> {{ $c.suffix | default "Initiative" }}</span>{{ end }}
+  </div></div>
+  {{- else }}
+  <div class="container footer-inner">
+    <div>
+      <p>&copy; {{ now.Year }} {{ site.Params.owner | default site.Title }}{{ with site.Params.licence }}. {{ . }}{{ end }}</p>
+      {{- with site.Menus.footer }}
+      <ul>
+        {{- range . }}<li><a href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}
+      </ul>
+      {{- end }}
+    </div>
+    {{- if not $c.hide }}
+    <p class="credit">{{ $c.prefix | default "Developed under the" }} <a href="{{ $c.url | default "https://open.czt.sh" }}">{{ $c.name | default "ProjectOpenCZTSH" }}</a> {{ $c.suffix | default "Initiative" }}</p>
+    {{- end }}
+  </div>
+  {{- end }}
+</footer>

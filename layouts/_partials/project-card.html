@@ -1,0 +1,10 @@
+<li class="pcard">
+  {{- $img := .Resources.GetMatch "cover.*" }}
+  {{- if $img }}<a class="cover" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">{{ partial "cover.html" (dict "page" . "w" 960 "h" 600) }}</a>{{ end }}
+  <div>
+    <span class="year">{{ .Params.year | default (.Date.Format "2006") }}{{ with .Params.status }} · {{ . }}{{ end }}</span>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  </div>
+  <p>{{ .Description | default .Summary | plainify | truncate 150 }}</p>
+  {{- with .Params.tags }}<ul class="chips">{{ range first 4 . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+</li>

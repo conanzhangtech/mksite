@@ -1,0 +1,77 @@
+baseURL = "https://mksite.czt.sh/"
+locale = "en-GB"
+title = "mksite"
+theme = "mksite"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  tagline = "a Hugo theme for product pages and documentation"
+  description = "mksite is a free Hugo theme that makes a product page and a documentation site, with a button back to the product on every docs page."
+  author = "Conan Zhang"
+  owner = "Conan Zhang"
+  licence = "Released under the MIT licence."
+  themeColor = "#0b6b52"
+  icon = "/icon.svg"
+  logo = "/icon.svg"
+
+  [[params.social]]
+    name = "LinkedIn"
+    handle = "conanzhangtech"
+    url = "https://www.linkedin.com/in/conanzhangtech/"
+  [[params.social]]
+    name = "GitHub"
+    handle = "conanzhangtech"
+    url = "https://github.com/conanzhangtech"
+  [[params.social]]
+    name = "Instagram"
+    handle = "@conanzhangtech"
+    url = "https://www.instagram.com/conanzhangtech"
+  [[params.social]]
+    name = "Telegram"
+    handle = "@conanzhangtech"
+    url = "https://t.me/conanzhangtech"
+  [[params.social]]
+    name = "Email"
+    handle = "conan_zhang@isolatedcommand.com"
+    url = "mailto:conan_zhang@isolatedcommand.com"
+
+[params.initiative]
+  name = "ProjectOpenCZTSH"
+  url = "https://open.czt.sh"
+
+[menus]
+  [[menus.main]]
+    name = "What you get"
+    url = "/#features"
+    weight = 1
+  [[menus.main]]
+    name = "Use it"
+    url = "/use/"
+    weight = 2
+  [[menus.main]]
+    name = "Demo"
+    url = "https://demo.mksite.czt.sh"
+    weight = 3
+  [[menus.main]]
+    name = "GitHub"
+    url = "https://github.com/conanzhangtech/mksite"
+    weight = 4
+  [[menus.footer]]
+    name = "Source"
+    url = "https://github.com/conanzhangtech/mksite"
+    weight = 1
+  [[menus.footer]]
+    name = "More open source"
+    url = "https://open.czt.sh"
+    weight = 2
+  [[menus.footer]]
+    name = "czt.sh"
+    url = "https://czt.sh"
+    weight = 3
+
+[markup.highlight]
+  noClasses = true
+  style = "github"
+
+[taxonomies]

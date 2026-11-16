@@ -1,0 +1,11 @@
+{{- /* Usage: partial "cover.html" (dict "page" . "w" 960 "h" 600). Photos are resized. SVG art is used as it is. */ -}}
+{{- $img := .page.Resources.GetMatch "cover.*" -}}
+{{- if $img }}
+  {{- $w := .w | default 1280 -}}{{- $h := .h | default 800 -}}
+  {{- if eq $img.MediaType.SubType "svg+xml" -}}
+  <img src="{{ $img.RelPermalink }}" alt="{{ .page.Params.coverAlt | default "" }}" loading="lazy" decoding="async" width="{{ $w }}" height="{{ $h }}">
+  {{- else -}}
+  {{- $s := $img.Fill (printf "%dx%d center q80" $w $h) -}}
+  <img src="{{ $s.RelPermalink }}" alt="{{ .page.Params.coverAlt | default "" }}" loading="lazy" decoding="async" width="{{ $s.Width }}" height="{{ $s.Height }}">
+  {{- end -}}
+{{- end }}

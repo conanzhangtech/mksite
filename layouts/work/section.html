@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{- $all := where site.RegularPages "Section" "in" (slice "projects" "research" "articles") -}}
+<div class="container pf-article">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="standfirst">{{ . }}</p>{{ end }}
+  <div class="timeline">
+    <div class="filters" role="radiogroup" aria-label="Filter by type">
+      <input type="radio" name="f" id="f-all" checked><label for="f-all">Everything</label>
+      <input type="radio" name="f" id="f-projects"><label for="f-projects">Projects</label>
+      <input type="radio" name="f" id="f-research"><label for="f-research">Research</label>
+      <input type="radio" name="f" id="f-articles"><label for="f-articles">Articles</label>
+    </div>
+    {{- range $all.GroupByDate "2006" "desc" }}
+    <h2 class="tl-year">{{ .Key }}</h2>
+    <ul class="tl-list">
+      {{- range .Pages }}
+      <li class="tl-item" data-type="{{ .Section }}">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan" }}</time>
+        <div><span class="type-tag">{{ cond (eq .Section "projects") "Project" (cond (eq .Section "research") "Research" "Article") }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a><p>{{ .Description | default .Params.abstract | default .Summary | plainify | truncate 150 }}</p></div>
+      </li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+</div>
+{{ end }}

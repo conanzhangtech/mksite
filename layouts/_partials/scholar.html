@@ -1,0 +1,15 @@
+{{- /* Google Scholar and Dublin Core-free tags for research pages. These are the tags Google Scholar documents. */ -}}
+{{- if and .IsPage (eq .Section "research") }}
+<meta name="citation_title" content="{{ .Title }}">
+{{- range .Params.authors }}
+<meta name="citation_author" content="{{ . }}">
+{{- end }}
+{{- with .Date }}<meta name="citation_publication_date" content="{{ .Format "2006/01/02" }}">{{ end }}
+{{- with .Params.venue }}<meta name="{{ cond (eq $.Params.kind "conference") "citation_conference_title" "citation_journal_title" }}" content="{{ . }}">{{ end }}
+{{- with .Params.doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
+{{- with .Params.abstract }}<meta name="citation_abstract" content="{{ . | plainify }}">{{ end }}
+<meta name="citation_abstract_html_url" content="{{ .Permalink }}">
+{{- with (.Resources.GetMatch "*.pdf") }}<meta name="citation_pdf_url" content="{{ .Permalink }}">{{ end }}
+{{- $authors := slice }}{{ range .Params.authors }}{{ $authors = $authors | append (dict "@type" "Person" "name" .) }}{{ end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "ScholarlyArticle" "headline" .Title "name" .Title "author" $authors "datePublished" (.Date.Format "2006-01-02") "isPartOf" (dict "@type" "Periodical" "name" (.Params.venue | default "")) "url" .Permalink | jsonify | safeJS }}</script>
+{{- end }}

@@ -1,0 +1,100 @@
+{{ define "main" }}
+<div class="container lp-hero">
+  <div class="lp-copy">
+    <p class="lp-label">Project mksite &middot; a Hugo theme &middot; MIT licence</p>
+    <h1>Write Markdown files. Get a website.</h1>
+    <p class="lp-lede">mksite is a free theme for Hugo. It turns a folder of text files into a portfolio, a product page or a documentation site. Research papers open in a reader on the page, and your résumé prints to PDF.</p>
+    <div class="cta">
+      <a class="btn" href="https://demo.mksite.czt.sh">{{ partial "icon.html" "external-link" }}Try the demo</a>
+      <a class="btn light" href="https://github.com/conanzhangtech/mksite">{{ partial "icon.html" "github" }}Get the theme</a>
+    </div>
+    <p class="lp-small">Needs Hugo 0.146 or newer. There is nothing else to install.</p>
+  </div>
+
+  <figure class="lp-pair" aria-label="A Markdown file and the page it makes">
+    <div class="lp-file">
+      <p class="lp-path">content/research/my-paper/index.md</p>
+<pre><code><span class="ln"><i>1</i>---</span>
+<span class="ln hl"><i>1</i>title: "Cheap Sensors, Honest Error Bars"</span>
+<span class="ln hl"><i>1</i>authors: [Mira Okafor, Priya Raman]</span>
+<span class="ln hl"><i>2</i>year: 2026</span>
+<span class="ln hl"><i>2</i>venue: Journal of Environmental Sensing</span>
+<span class="ln hl"><i>3</i>abstract: "We calibrated 60 units..."</span>
+<span class="ln hl"><i>4</i>related: [projects/tidemark]</span>
+<span class="ln"><i>1</i>---</span></code></pre>
+      <p class="lp-path">content/research/my-paper/paper.pdf</p>
+    </div>
+    <div class="lp-arrow" aria-hidden="true">becomes</div>
+    <div class="lp-page">
+      <p class="lp-crumb">Research / 2026</p>
+      <p class="lp-title"><i>1</i>Cheap Sensors, Honest Error Bars</p>
+      <p class="lp-by">Mira Okafor, Priya Raman</p>
+      <p class="lp-facts"><i>2</i>Journal of Environmental Sensing &middot; 2026</p>
+      <p class="lp-cite"><i>2</i>Cite this paper</p>
+      <div class="lp-reader"><i>3</i><span>Paper.pdf</span><span class="lp-lines"></span></div>
+      <p class="lp-rel"><i>4</i>Connected work: Tidemark</p>
+    </div>
+  </figure>
+</div>
+
+<div class="container lp-notes">
+  <ol>
+    <li><i>1</i>The title and authors become the page heading and the tags Google Scholar reads.</li>
+    <li><i>2</i>The year and venue fill the facts row and the citation box.</li>
+    <li><i>3</i>A PDF in the same folder opens in a reader on the page, with a download button beside it.</li>
+    <li><i>4</i>Pages that list each other in <code>related</code> link back to one another.</li>
+  </ol>
+</div>
+
+<section class="container lp-contents" aria-labelledby="c-h">
+  <h2 id="c-h">Contents</h2>
+  <ol>
+    <li><span class="n">01</span><div><a href="https://demo.mksite.czt.sh/portfolio/">Portfolio</a><p>Case studies with a cover image, a short list of what you can help with, and talks and awards.</p></div></li>
+    <li><span class="n">02</span><div><a href="https://demo.mksite.czt.sh/research/calibrating-low-cost-air-monitors/">Research pages</a><p>Abstract, citation box, a PDF reader and Google Scholar tags.</p></div></li>
+    <li><span class="n">03</span><div><a href="https://demo.mksite.czt.sh/resume/">Résumé</a><p>Built from the same files as the rest of the site. Save it as PDF from the print window.</p></div></li>
+    <li><span class="n">04</span><div><a href="https://docs.open.czt.sh/mksite/">Documentation</a><p>A sidebar, a table of contents, and a button on every page that goes back to the product.</p></div></li>
+    <li><span class="n">05</span><div><a href="/use/">Product page</a><p>A headline, buttons and free text. This page uses its own layout, which you can copy.</p></div></li>
+    <li><span class="n">06</span><div><a href="https://demo.mksite.czt.sh/work/">Timeline and search</a><p>Everything in one dated list with filters, plus a search box on the <kbd>/</kbd> key.</p></div></li>
+  </ol>
+</section>
+
+<section class="container lp-limits" aria-labelledby="l-h">
+  <h2 id="l-h">What it will not do</h2>
+  <div class="lp-cols">
+    <p>It has no editor. You write the files in any text editor and Hugo builds the site.</p>
+    <p>It is not a page builder. The layouts are fixed. You choose a palette, a footer and the order of the menu, and you cannot drag things around.</p>
+    <p>It needs Hugo 0.146 or newer, because the templates use the layout folders Hugo introduced in that version.</p>
+    <p>I have tried the PDF reader in Chrome only. Firefox and Safari should work, but I have not checked.</p>
+  </div>
+</section>
+
+<section class="container lp-start" aria-labelledby="s-h">
+  <h2 id="s-h">Start in five minutes</h2>
+  <ol>
+    <li>Make a site with <code>hugo new site my-site</code>.</li>
+    <li>Clone the theme into <code>themes/mksite</code> and copy <code>exampleSite/hugo.toml</code> over yours.</li>
+    <li>Run <code>hugo server</code>, open the address it prints, and replace the sample text with your own.</li>
+  </ol>
+  <p><a href="/use/">Read the full steps</a>, or look at the <a href="https://docs.open.czt.sh/mksite/">documentation</a>.</p>
+</section>
+
+<section class="container lp-who" aria-labelledby="w-h">
+  <h2 id="w-h">Hello</h2>
+  <div class="lp-who-grid">
+    <div>
+      <p>I'm Conan Zhang, and I live in Singapore. I build small open source tools in my spare time. mksite began as the way I made project pages for my own work, and then I wanted the same thing for papers and a résumé. It is free, and it is one of the projects at <a href="https://open.czt.sh">open.czt.sh</a>.</p>
+      <p>If it saves you time, you can say thanks. A coffee or a small donation pays for the domains and the hours I spend on it.</p>
+      <div class="cta">
+        <a class="btn sun" href="https://github.com/sponsors/conanzhangtech">{{ partial "icon.html" "heart" }}Sponsor on GitHub</a>
+        <a class="btn light" href="https://ko-fi.com/conanzhangtech">{{ partial "icon.html" "coffee" }}Buy me a can of milo</a>
+        <a class="btn light" href="https://open.czt.sh/#support">More ways to give</a>
+      </div>
+    </div>
+    <div>
+      <h3>Get in touch</h3>
+      <p>Questions, bug reports and photos of sites you have built with it are all welcome.</p>
+      {{ partial "social.html" (dict "class" "contact" "labels" true) }}
+    </div>
+  </div>
+</section>
+{{ end }}

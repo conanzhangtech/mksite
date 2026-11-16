@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="container pf-article">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="standfirst">{{ . }}</p>{{ end }}
+  {{- range .Pages.GroupByDate "2006" "desc" }}
+  <section aria-label="{{ .Key }}">
+    <h2 class="tl-year">{{ .Key }}</h2>
+    <ul class="rows-list flush">{{ range .Pages }}{{ partial "research-row.html" . }}{{ end }}</ul>
+  </section>
+  {{- end }}
+</div>
+{{ end }}

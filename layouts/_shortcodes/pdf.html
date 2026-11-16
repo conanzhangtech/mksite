@@ -1,0 +1,4 @@
+{{- $name := .Get "src" | default (.Get 0) -}}
+{{- $r := .Page.Resources.GetMatch $name -}}
+{{- $url := cond (ne $r nil) $r.RelPermalink $name -}}
+{{- partial "pdf.html" (dict "page" .Page "url" $url "title" (.Get "title")) -}}

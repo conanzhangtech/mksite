@@ -1,0 +1,7 @@
+{{- if site.Params.search }}
+<dialog id="search" class="search" data-index="{{ "index.json" | relURL }}" aria-label="Search the site">
+  <form method="dialog"><input type="search" placeholder="Search projects, research and articles" aria-label="Search" autocomplete="off"></form>
+  <ul></ul>
+  <p class="hint">Arrow keys to move, Enter to open, Esc to close.</p>
+</dialog>
+{{- end }}

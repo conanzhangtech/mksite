@@ -1,0 +1,29 @@
+{{- $here := .RelPermalink -}}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ site.Home.RelPermalink }}">
+      {{- with site.Params.logo }}<img src="{{ . | relURL }}" alt="" width="28" height="28">{{ end -}}
+      {{ site.Title }}
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {{- /* Uses [menus.main] from hugo.toml, or lists your top-level sections when there is none. */ -}}
+        {{- $items := slice }}
+        {{- if site.Menus.main }}{{ range site.Menus.main }}{{ $items = $items | append (dict "url" .URL "name" .Name) }}{{ end }}
+        {{- else }}{{ range site.Home.Sections }}{{ $items = $items | append (dict "url" .RelPermalink "name" .LinkTitle) }}{{ end }}{{ end }}
+        {{- range $items }}
+        {{- $on := or (eq .url $here) (and (ne .url "/") (hasPrefix $here .url) (not (hasPrefix .url "http"))) }}
+        <li><a href="{{ .url }}"{{ if $on }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+    {{- if site.Params.search }}
+    <div class="header-tools">
+      <button class="tool-btn" type="button" data-open-search aria-label="Search the site" aria-keyshortcuts="/">
+        {{ partial "icon.html" "search" }}
+        <kbd>/</kbd>
+      </button>
+    </div>
+    {{- end }}
+  </div>
+</header>

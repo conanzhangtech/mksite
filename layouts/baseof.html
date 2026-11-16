@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en-GB" }}"{{ with site.Params.palette }} data-palette="{{ . }}"{{ end }}>
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <a class="skip" href="#content">Skip to the content</a>
+  {{- if or (eq .Section "articles") (eq .Section "research") (eq .Section "projects") }}{{ if .IsPage }}<div class="progress" aria-hidden="true"></div>{{ end }}{{ end }}
+  {{ partial "banner.html" . }}
+  {{ partial "header.html" . }}
+  <main id="content">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ partial "search.html" . }}
+  {{- if .Store.Get "pdf" }}
+  {{- $pv := resources.Get "js/pdf-viewer.js" | minify | fingerprint }}
+  <script type="module" src="{{ $pv.RelPermalink }}" integrity="{{ $pv.Data.Integrity }}"></script>
+  {{- end }}
+</body>
+</html>

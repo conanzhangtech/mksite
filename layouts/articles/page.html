@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="container pf-article">
+  <p class="crumbs"><a href="{{ "articles/" | relURL }}">Articles</a></p>
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="standfirst">{{ . }}</p>{{ end }}
+  <p class="meta icons"><span>{{ partial "icon.html" "calendar" }}{{ .Date.Format "2 January 2006" }}</span><span>{{ partial "icon.html" "clock" }}{{ .ReadingTime }} min read</span></p>
+  {{- if .Resources.GetMatch "cover.*" }}<figure class="hero-cover">{{ partial "cover.html" (dict "page" . "w" 1280 "h" 640) }}</figure>{{ end }}
+  <div class="pf-layout">
+    <div class="prose">{{ .Content }}{{ partial "related.html" . }}</div>
+    <aside class="aside" aria-label="On this page">
+      {{- if gt (len .TableOfContents) 80 }}<p class="label">On this page</p>{{ .TableOfContents }}{{ end }}
+      {{- with .Params.tags }}<p class="label">Tags</p><ul class="chips">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+    </aside>
+  </div>
+</article>
+{{ end }}

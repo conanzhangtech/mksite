@@ -1,0 +1,20 @@
+{{- /* Pages this one points to with "related", plus pages that point back at it. */ -}}
+{{- $me := printf "%s/%s" .Section .File.ContentBaseName -}}
+{{- $seen := slice -}}
+{{- $out := slice -}}
+{{- range .Params.related }}
+  {{- with site.GetPage . }}{{ if not (in $seen .RelPermalink) }}{{ $seen = $seen | append .RelPermalink }}{{ $out = $out | append . }}{{ end }}{{ end }}
+{{- end }}
+{{- range site.RegularPages }}
+  {{- if and (in (.Params.related | default slice) $me) (not (in $seen .RelPermalink)) }}{{ $seen = $seen | append .RelPermalink }}{{ $out = $out | append . }}{{ end }}
+{{- end }}
+{{- if $out }}
+<section class="related" aria-labelledby="rel-h">
+  <h2 id="rel-h">Connected work</h2>
+  <ul>
+    {{- range $out }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><small>{{ cond (eq .Section "projects") "Project" (cond (eq .Section "research") "Research" "Article") }}</small></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}

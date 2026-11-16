@@ -1,0 +1,38 @@
+{{- /* BibTeX and a plain citation, built from front matter. */ -}}
+{{- $names := slice -}}
+{{- $bibAuthors := slice -}}
+{{- range .Params.authors }}
+  {{- $parts := split . " " }}
+  {{- $last := index $parts (sub (len $parts) 1) }}
+  {{- $ini := slice }}
+  {{- range first (sub (len $parts) 1) $parts }}{{ $ini = $ini | append (printf "%s." (substr . 0 1)) }}{{ end }}
+  {{- $names = $names | append (printf "%s, %s" $last (delimit $ini " ")) }}
+  {{- $bibAuthors = $bibAuthors | append (printf "%s, %s" $last (delimit (first (sub (len $parts) 1) $parts) " ")) }}
+{{- end }}
+{{- $lastname := index (split (index .Params.authors 0) " ") (sub (len (split (index .Params.authors 0) " ")) 1) | lower }}
+{{- $year := .Params.year | default (.Date.Format "2006") }}
+{{- $key := printf "%s%v%s" $lastname $year (index (split (lower (replaceRE "[^A-Za-z ]" "" .Title)) " ") 0) }}
+{{- $type := cond (eq .Params.kind "conference") "inproceedings" (cond (eq .Params.kind "preprint") "misc" "article") }}
+{{- $venueKey := cond (eq .Params.kind "conference") "booktitle" "journal" }}
+<details class="cite">
+  <summary>{{ partial "icon.html" "quote" }}Cite this paper</summary>
+  <div class="cbody">
+    <div>
+      <h3>Plain text</h3>
+      <pre id="cite-text">{{ delimit $names ", " }} ({{ $year }}). {{ .Title }}.{{ with .Params.venue }} {{ . }}.{{ end }}{{ with .Params.doi }} https://doi.org/{{ . }}{{ end }}</pre>
+      <button class="btn sm light" type="button" data-copy="#cite-text">Copy</button>
+    </div>
+    <div>
+      <h3>BibTeX</h3>
+      <pre id="cite-bib">@{{ $type }}{ {{- $key -}},
+  title = {{ "{" }}{{ .Title }}{{ "}" }},
+  author = {{ "{" }}{{ delimit $bibAuthors " and " }}{{ "}" }},
+  year = {{ "{" }}{{ $year }}{{ "}" }},{{ with .Params.venue }}
+  {{ $venueKey }} = {{ "{" }}{{ . }}{{ "}" }},{{ end }}{{ with .Params.doi }}
+  doi = {{ "{" }}{{ . }}{{ "}" }},{{ end }}
+  url = {{ "{" }}{{ .Permalink }}{{ "}" }}
+}</pre>
+      <button class="btn sm light" type="button" data-copy="#cite-bib">Copy</button>
+    </div>
+  </div>
+</details>

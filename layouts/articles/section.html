@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="container pf-article">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="standfirst">{{ . }}</p>{{ end }}
+  <ul class="rows-list">{{ range .Pages.ByDate.Reverse }}{{ partial "article-row.html" . }}{{ end }}</ul>
+</div>
+{{ end }}

@@ -1,0 +1,11 @@
+{{- /* Profile links as icons, from params.social. Pass labels=true to show the names too. */ -}}
+{{- $map := dict "email" "mail" "scholar" "googlescholar" "google scholar" "googlescholar" "twitter" "x" -}}
+{{- with site.Params.social }}
+<ul class="social {{ $.class }}{{ if $.labels }} labelled{{ end }}" aria-label="Find me elsewhere">
+  {{- range . }}
+  {{- $key := (.icon | default (lower .name)) -}}
+  {{- $icon := index $map $key | default ($key | replaceRE "[^a-z]" "") }}
+  <li><a class="soc" href="{{ .url }}" rel="me noopener" aria-label="{{ .name }}{{ with .handle }}, {{ . }}{{ end }}" title="{{ .name }}{{ with .handle }}: {{ . }}{{ end }}{{ if .placeholder }} (placeholder link){{ end }}">{{ partial "icon.html" $icon }}{{ if $.labels }}<span>{{ .name }}</span>{{ end }}</a></li>
+  {{- end }}
+</ul>
+{{- end }}

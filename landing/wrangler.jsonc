@@ -1,0 +1,9 @@
+{
+  // Static site built by Hugo. Build first: hugo --minify
+  "name": "mksite",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "public" },
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "mksite.czt.sh", "custom_domain": true }]
+}

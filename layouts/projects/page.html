@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="container pf-article">
+  <p class="crumbs"><a href="{{ "projects/" | relURL }}">Projects</a> / {{ .Title }}</p>
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="standfirst">{{ . }}</p>{{ end }}
+  <dl class="facts">
+    {{- with .Params.role }}<div><dt>Role</dt><dd>{{ . }}</dd></div>{{ end }}
+    <div><dt>Year</dt><dd>{{ .Params.year | default (.Date.Format "2006") }}</dd></div>
+    {{- with .Params.status }}<div><dt>Status</dt><dd>{{ . }}</dd></div>{{ end }}
+    {{- with .Params.stack }}<div><dt>Built with</dt><dd>{{ delimit . ", " }}</dd></div>{{ end }}
+    {{- with .Params.links }}<div><dt>Links</dt><dd>{{ range $i, $l := . }}{{ if $i }} · {{ end }}<a href="{{ $l.url }}">{{ $l.label }}{{ partial "icon.html" "external-link" }}</a>{{ end }}</dd></div>{{ end }}
+  </dl>
+  {{- $img := .Resources.GetMatch "cover.*" }}
+  {{- if $img }}<figure class="hero-cover">{{ partial "cover.html" (dict "page" . "w" 1280 "h" 640) }}</figure>{{ end }}
+  <div class="pf-layout">
+    <div class="prose">{{ .Content }}{{ partial "related.html" . }}</div>
+    <aside class="aside" aria-label="On this page">
+      {{- if gt (len .TableOfContents) 80 }}<p class="label">On this page</p>{{ .TableOfContents }}{{ end }}
+      {{- with .Params.tags }}<p class="label">Tags</p><ul class="chips">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+    </aside>
+  </div>
+</article>
+{{ end }}

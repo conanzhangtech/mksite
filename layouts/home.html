@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{- if .Params.portfolio }}{{ partial "portfolio-home.html" . }}{{ else }}
+{{- $h := .Params.hero | default dict -}}
+{{- if $h }}
+<div class="hero-band">
+  <div class="container hero">
+    {{- with $h.tag }}<p class="tag">{{ . }}</p>{{ end }}
+    <h1>{{ $h.title | default .Title }}</h1>
+    {{- with $h.lede }}<p class="lede">{{ . }}</p>{{ end }}
+    {{- with $h.buttons }}
+    <div class="cta">
+      {{- range . }}{{ partial "button.html" . }}{{ end }}
+    </div>
+    {{- end }}
+    {{- with $h.note }}<p class="note">{{ . }}</p>{{ end }}
+  </div>
+</div>
+{{- end }}
+<div class="container section">
+  {{- with .Params.features }}
+  <ul class="features">
+    {{- range . }}
+    <li><h3>{{ .title }}</h3><p>{{ .text }}</p>{{ with .url }}<p><a href="{{ . }}">{{ $.Params.featureLink | default "Read more" }}</a></p>{{ end }}</li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  {{- if .Params.cards }}
+  <ul class="cards">
+    {{- range .Site.Sections.ByWeight }}
+    <li class="card">
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Params.summary | default .Description }}</p>
+      <div class="links"><a href="{{ .RelPermalink }}">Open the docs</a>{{ with .Params.product_url }}<a href="{{ . }}">{{ $.Params.productLabel | default "Product page" }}</a>{{ end }}</div>
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  {{- with .Content }}
+  <div class="prose">{{ . }}</div>
+  {{- end }}
+</div>
+{{ end }}
+{{ end }}

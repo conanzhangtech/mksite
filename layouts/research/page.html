@@ -1,0 +1,27 @@
+{{ define "main" }}
+{{- $pdf := .Resources.GetMatch "*.pdf" -}}
+<article class="container pf-article">
+  <p class="crumbs"><a href="{{ "research/" | relURL }}">Research</a> / {{ .Params.year | default (.Date.Format "2006") }}</p>
+  <h1>{{ .Title }}</h1>
+  <p class="standfirst">{{ delimit .Params.authors ", " }}</p>
+  <dl class="facts">
+    {{- with .Params.venue }}<div><dt>{{ cond (eq $.Params.kind "conference") "Conference" (cond (eq $.Params.kind "preprint") "Posted on" "Journal") }}</dt><dd>{{ . }}</dd></div>{{ end }}
+    <div><dt>Year</dt><dd>{{ .Params.year | default (.Date.Format "2006") }}</dd></div>
+    {{- with .Params.doi }}<div><dt>DOI</dt><dd><a href="https://doi.org/{{ . }}">{{ . }}</a></dd></div>{{ end }}
+    {{- with .Params.code }}<div><dt>Code</dt><dd><a href="{{ . }}">Repository</a></dd></div>{{ end }}
+    {{- if $pdf }}<div><dt>Paper</dt><dd><a href="{{ $pdf.RelPermalink }}" download>Download PDF</a></dd></div>{{ end }}
+  </dl>
+  {{- with .Params.abstract }}
+  <div class="prose abstract"><h2>Abstract</h2><p>{{ . }}</p></div>
+  {{- end }}
+  {{ partial "cite.html" . }}
+  {{- if $pdf }}{{ partial "pdf.html" (dict "page" . "url" $pdf.RelPermalink "title" .Title) }}{{ end }}
+  <div class="pf-layout">
+    <div class="prose">{{ .Content }}{{ partial "related.html" . }}</div>
+    <aside class="aside" aria-label="On this page">
+      {{- if gt (len .TableOfContents) 80 }}<p class="label">On this page</p>{{ .TableOfContents }}{{ end }}
+      {{- with .Params.tags }}<p class="label">Topics</p><ul class="chips">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+    </aside>
+  </div>
+</article>
+{{ end }}
