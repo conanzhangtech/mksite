@@ -47,9 +47,24 @@ Then add work with `hugo new projects/my-app`, `hugo new research/my-paper` or `
 
 To preview either site from this folder: `hugo server --source exampleSite --themesDir ../..`
 
-## Support
+## Support this project
 
-mksite is free and has no adverts. If it helps you, see the support options at https://open.czt.sh/#support.
+mksite is free, has no adverts and is built by one person in his own time. If it saved you time, you can say thanks:
+
+| Way to give | Link | Notes |
+| --- | --- | --- |
+| GitHub Sponsors | [github.com/sponsors/conanzhangtech](https://github.com/sponsors/conanzhangtech) | Monthly or one-off |
+| Ko-fi | [ko-fi.com/conanzhangtech](https://ko-fi.com/conanzhangtech) | A one-off tip, no account needed |
+| PayPal | [paypal.me/conanzhangtech](https://paypal.me/conanzhangtech) | Any amount |
+
+**Crypto (USDT).** Send only on the network named in the table. Coins sent on another network cannot be recovered. Check the first and last few characters of the address before you send.
+
+| Network | Address | QR code |
+| --- | --- | --- |
+| Ethereum (ERC-20) | `0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16` | <img src="https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/qr/usdt-erc20.svg" width="96" alt="QR code for the Ethereum USDT address"> |
+| Tron (TRC-20) | `TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi` | <img src="https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/qr/usdt-trc20.svg" width="96" alt="QR code for the Tron USDT address"> |
+
+More ways to give are on the [support page](https://open.czt.sh/#support). Starring the repository and telling a friend help too.
 
 ## Licence
 
