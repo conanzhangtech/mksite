@@ -2,7 +2,7 @@
 
 ![mksite demo: a portfolio with projects, research and articles](https://raw.githubusercontent.com/conanzhangtech/mksite/main/images/screenshot.png)
 
-A free Hugo theme for product pages and documentation. Made by [Conan Zhang](https://czt.sh) under the [ProjectOpenCZTSH](https://open.czt.sh) Initiative.
+A free Hugo theme for portfolios, research papers with a built-in PDF reader, product pages and documentation. Made by [Conan Zhang](https://czt.sh) under the [ProjectOpenCZTSH](https://open.czt.sh) Initiative.
 
 - Project page: https://mksite.czt.sh
 - Demo: https://demo.mksite.czt.sh
@@ -20,7 +20,7 @@ A free Hugo theme for product pages and documentation. Made by [Conan Zhang](htt
 - Title, description, canonical link, Open Graph and JSON-LD.
 - No tracking and no fonts from other servers. JavaScript is used only for search, copy buttons, the colour switcher and the PDF reader.
 
-Needs Hugo 0.146 or newer.
+Needs Hugo 0.146 or newer (the standard edition is enough).
 
 ## Use it
 
