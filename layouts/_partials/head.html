@@ -16,6 +16,12 @@
 {{- end }}
 {{- $js := resources.Get "js/site.js" | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- with site.Params.kofi }}
+{{- $kc := resources.Get "css/kofi.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $kc.RelPermalink }}" integrity="{{ $kc.Data.Integrity }}">
+{{- $kj := resources.Get "js/kofi.js" | minify | fingerprint }}
+<script src="{{ $kj.RelPermalink }}" integrity="{{ $kj.Data.Integrity }}" data-handle="{{ . }}" data-text="{{ site.Params.kofiText | default "Buy me a coffee" }}" defer></script>
+{{- end }}
 {{- with site.Params.fontPreload | default "/fonts/schibsted-grotesk.woff2" }}
 <link rel="preload" href="{{ . }}" as="font" type="font/woff2" crossorigin>
 {{- end }}

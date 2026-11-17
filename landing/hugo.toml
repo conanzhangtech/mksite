@@ -6,6 +6,8 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "term", "RSS"]
 
 [params]
+  kofi = "conanzhangtech"
+  kofiText = "Buy me a can of Milo ^_^"
   tagline = "a Hugo theme for product pages and documentation"
   description = "mksite is a free Hugo theme that makes a product page and a documentation site, with a button back to the product on every docs page."
   author = "Conan Zhang"
